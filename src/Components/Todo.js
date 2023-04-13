@@ -25,7 +25,20 @@ if (edit.id) {
         <div 
         className={todo.isComplete ? 'todo-row complete' : 'todo-row'} 
         key={index}>
-            <div key={todo.id} onClick={() => completeTodo(todo.id)}>
+            <input
+            type="checkbox"
+            checked={todo.isComplete}
+            onChange={() => 
+                {
+                    completeTodo(todo.id)
+                }
+            }>
+            </input>
+            <div key={todo.id} onClick={() => 
+                {
+                    completeTodo(todo.id)
+                }
+            }>
                 {todo.text}
             </div>
             <div className='icons'>
