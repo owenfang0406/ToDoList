@@ -51,7 +51,7 @@ const handleChange = e => {
         onChange={handleChange}
         ref={inputRef}
         ></input>
-        <button className='todo-button'><span class="plus-icon">+</span></button>
+        <button className='todo-button'><span className="plus-icon">+</span></button>
         </>
         )
         }

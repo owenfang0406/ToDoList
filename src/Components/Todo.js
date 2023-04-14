@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RiCloseCircleLine } from 'react-icons/ri'
 import{ TiEdit } from 'react-icons/ti'
 import TodoForm from './TodoForm'
+import './Todo.css'
 
 function Todo({todos, completeTodo, removeTodo, updateTodo}) {
 const [edit, setEdit] = useState ({
@@ -23,29 +24,45 @@ if (edit.id) {
   return (
     todos.map((todo, index) => (
         <div 
-        className={todo.isComplete ? 'todo-row complete' : 'todo-row'} 
+        className='todo-row'
         key={index}>
-            <input
-            type="checkbox"
-            checked={todo.isComplete}
-            onChange={() => 
-                {
-                    completeTodo(todo.id)
-                }
-            }>
-            </input>
-            <div key={todo.id} onClick={() => 
-                {
-                    completeTodo(todo.id)
-                }
-            }>
-                {todo.text}
+            <div className='subBox'>
+                <label className='checkbox' for='myCheckBox' onClick={() => completeTodo(todo.id)} >
+                    <input
+                    type="checkbox"
+                    id='myCheckBox'
+                    className='checkBoxInput'
+                    checked={todo.isComplete}
+                    onChange={() => 
+                        {
+                            completeTodo(todo.id)
+                        }
+                    }>
+                    </input>
+                    <div className='actualCheckBox'>
+
+                    </div>
+                    <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                        {todo.text}
+                    </div>
+                </label>
             </div>
             <div className='icons'>
-                <RiCloseCircleLine
+                <div
+                 onClick={() => removeTodo(todo.id)}
+                 className='delete-icon'
+                >
+                <span class="close-symbol">
+                        <span class="close-symbol__line">
+                            </span><span class="close-symbol__line">
+                        </span>
+                </span>
+                </div>
+
+                {/* <RiCloseCircleLine
                 onClick={() => removeTodo(todo.id)}
                 className='delete-icon'
-                />
+                /> */}
                 <TiEdit
                 onClick={() => setEdit({ id: todo.id, value: todo.text })}
                 className='edit-icon'
