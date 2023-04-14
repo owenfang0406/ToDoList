@@ -1,0 +1,16 @@
+h3 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: rgba(144, 121, 185, 1);
+    margin-bottom: 15px;
+}
+
+.inputBox {
+    max-width: 1400px;
+    position: fixed;
+    bottom: 10px;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 20px;
+}

@@ -1,0 +1,23 @@
+.todo-form {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.todo-button {
+    padding: 10px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    outline: none;
+    background: rgb(95, 122, 205);
+    color: #fff;
+}
+
+.plus-icon {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+}
+  
