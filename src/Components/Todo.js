@@ -4,7 +4,7 @@ import{ TiEdit } from 'react-icons/ti'
 import TodoForm from './TodoForm'
 import './Todo.css'
 
-function Todo({todos, completeTodo, removeTodo, updateTodo}) {
+function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList}) {
 const [edit, setEdit] = useState ({
     id: null,
     value: ''
@@ -27,7 +27,11 @@ if (edit.id) {
         className='todo-row'
         key={index}>
             <div className='subBox'>
-                <label className='checkbox' for='myCheckBox' onClick={() => completeTodo(todo.id)} >
+                <label className='checkbox' for='myCheckBox' onClick={() => 
+                    {
+                        completeTodo(todo)
+                        addToCompletedList(todo)    
+                    }} >
                     <input
                     type="checkbox"
                     id='myCheckBox'
@@ -35,7 +39,8 @@ if (edit.id) {
                     checked={todo.isComplete}
                     onChange={() => 
                         {
-                            completeTodo(todo.id)
+                            addToCompletedList(todo)
+                            completeTodo(todo)
                         }
                     }>
                     </input>
@@ -58,11 +63,6 @@ if (edit.id) {
                         </span>
                 </span>
                 </div>
-
-                {/* <RiCloseCircleLine
-                onClick={() => removeTodo(todo.id)}
-                className='delete-icon'
-                /> */}
                 <TiEdit
                 onClick={() => setEdit({ id: todo.id, value: todo.text })}
                 className='edit-icon'
