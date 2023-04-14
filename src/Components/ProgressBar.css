@@ -7,14 +7,14 @@
 .progressBar {
     width: 100%;
     height: 30px;
-    border-radius: 10px;
-    background-color: #e6e6e6;
+    border-radius: 15px;
+    background-color: white;
     margin-bottom: 10px;
 }
 
 .progressBarFilled {
     height: 100%;
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: #2ecc71;
     transition:  width 0.5s ease-out;
 }
