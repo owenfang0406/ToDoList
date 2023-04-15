@@ -1,0 +1,32 @@
+.button {
+    background-color: white;
+    display: block;
+    width: 70px;
+    height: 35px;
+    border-radius: 100px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.4s ease-in, background-color 0.4s ease-in;
+}
+
+.button::before {
+    position: absolute;
+    content: '';
+    background-color: rgb(189, 204, 246);
+    width: 25px;
+    height: 25px;
+    border-radius: 100px;
+    margin: 5px;
+}
+
+input:checked + .button {
+    background-color: blueviolet;
+}
+
+input:checked + .button::before {
+    transform: translateX(35px);
+}
+
+.checkBoxInput {
+    display: none;
+}

@@ -1,10 +1,12 @@
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState, useRef, useContext } from 'react'
 import { RiCloseCircleLine } from 'react-icons/ri'
 import{ TiEdit } from 'react-icons/ti'
 import TodoForm from './TodoForm'
 import './Todo.css'
+import { ContextStore } from '../App'
 
-function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList}) {
+function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList, showCompletedTodosOnly = false, completedTodos}) {
+const { isChecked } = useContext(ContextStore)
 const containerRef = useRef(null)
 const [edit, setEdit] = useState ({
     id: null,
@@ -23,13 +25,13 @@ useEffect(() => {
     if (containerRef.current !== null) {
       const container = containerRef.current;
       const lastTodoElement = container.querySelector('.todo-row:last-child');
-      console.log(lastTodoElement)
       if (lastTodoElement?.offsetTop !== undefined) {
         lastTodoElement?.scrollIntoView({behavior: 'smooth'})
       }
     }
-  }, [todos.length]);
-  
+    console.log(completedTodos)
+
+  }, [todos.length, completedTodos?.length]);
   
   
 
@@ -38,54 +40,163 @@ if (edit.id) {
 }
   return (
     <div ref={containerRef}>
-    {todos.map((todo, index) => (
-        <div 
-        className='todo-row'
-        key={todo.id}>
-            <div className='subBox'>
-                <label className='checkbox' for='myCheckBox' onClick={() => 
-                    {
-                        completeTodo(todo)
-                        addToCompletedList(todo)    
-                    }} >
-                    <input
-                    type="checkbox"
-                    id='myCheckBox'
-                    className='checkBoxInput'
-                    checked={todo.isComplete}
-                    onChange={() => 
+    {showCompletedTodosOnly ? 
+    (
+        completedTodos?.map((todo, index) => (
+            <div 
+            className='todo-row'
+            key={todo.id}>
+                <div className='subBox'>
+                    <label className='checkbox' for='myCheckBox' onClick={() => 
                         {
-                            addToCompletedList(todo)
                             completeTodo(todo)
-                        }
-                    }>
-                    </input>
-                    <div className='actualCheckBox'>
-
-                    </div>
-                    <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
-                        {todo.text}
-                    </div>
-                </label>
-            </div>
-            <div className='icons'>
-                <div
-                 onClick={() => removeTodo(todo.id)}
-                 className='delete-icon'
-                >
-                <span class="close-symbol">
-                        <span class="close-symbol__line">
-                            </span><span class="close-symbol__line">
-                        </span>
-                </span>
+                            addToCompletedList(todo)    
+                        }} >
+                        <input
+                        type="checkbox"
+                        id='myCheckBox'
+                        className='checkBoxInput'
+                        checked={todo.isComplete}
+                        onChange={() => 
+                            {
+                                addToCompletedList(todo)
+                                completeTodo(todo)
+                            }
+                        }>
+                        </input>
+                        <div className='actualCheckBox'>
+    
+                        </div>
+                        <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                            {todo.text}
+                        </div>
+                    </label>
                 </div>
-                <TiEdit
-                onClick={() => setEdit({ id: todo.id, value: todo.text })}
-                className='edit-icon'
-                />
+                <div className='icons'>
+                    <div
+                     onClick={() => removeTodo(todo.id)}
+                     className='delete-icon'
+                    >
+                    <span class="close-symbol">
+                            <span class="close-symbol__line">
+                                </span><span class="close-symbol__line">
+                            </span>
+                    </span>
+                    </div>
+                    <TiEdit
+                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    className='edit-icon'
+                    />
+                </div>
             </div>
-        </div>
-    ))}
+            )
+        )
+    )
+    : (
+        isChecked ? (
+            todos.filter(todo => todo.isComplete !== true)?.map((todo) => (
+            <div 
+            className='todo-row'
+            key={todo.id}>
+                <div className='subBox'>
+                    <label className='checkbox' for='myCheckBox' onClick={() => 
+                        {
+                            completeTodo(todo)
+                            addToCompletedList(todo)    
+                        }} >
+                        <input
+                        type="checkbox"
+                        id='myCheckBox'
+                        className='checkBoxInput'
+                        checked={todo.isComplete}
+                        onChange={() => 
+                            {
+                                addToCompletedList(todo)
+                                completeTodo(todo)
+                            }
+                        }>
+                        </input>
+                        <div className='actualCheckBox'>
+    
+                        </div>
+                        <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                            {todo.text}
+                        </div>
+                    </label>
+                </div>
+                <div className='icons'>
+                    <div
+                     onClick={() => removeTodo(todo.id)}
+                     className='delete-icon'
+                    >
+                    <span class="close-symbol">
+                            <span class="close-symbol__line">
+                                </span><span class="close-symbol__line">
+                            </span>
+                    </span>
+                    </div>
+                    <TiEdit
+                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    className='edit-icon'
+                    />
+                </div>
+            </div>
+            ))
+
+        ) : (
+            
+            todos.map((todo, index) => (
+            <div 
+            className='todo-row'
+            key={todo.id}>
+                <div className='subBox'>
+                    <label className='checkbox' for='myCheckBox' onClick={() => 
+                        {
+                            completeTodo(todo)
+                            addToCompletedList(todo)    
+                        }} >
+                        <input
+                        type="checkbox"
+                        id='myCheckBox'
+                        className='checkBoxInput'
+                        checked={todo.isComplete}
+                        onChange={() => 
+                            {
+                                addToCompletedList(todo)
+                                completeTodo(todo)
+                            }
+                        }>
+                        </input>
+                        <div className='actualCheckBox'>
+    
+                        </div>
+                        <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                            {todo.text}
+                        </div>
+                    </label>
+                </div>
+                <div className='icons'>
+                    <div
+                     onClick={() => removeTodo(todo.id)}
+                     className='delete-icon'
+                    >
+                    <span class="close-symbol">
+                            <span class="close-symbol__line">
+                                </span><span class="close-symbol__line">
+                            </span>
+                    </span>
+                    </div>
+                    <TiEdit
+                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    className='edit-icon'
+                    />
+                </div>
+            </div>
+                    )
+                )
+            )   
+        )
+    }
     </div>
   )
 }

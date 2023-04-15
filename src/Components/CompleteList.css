@@ -1,0 +1,16 @@
+.CompleteListCon {
+    height: 40vh;
+    max-width: 1400px;
+    margin: 0px 20px;
+    margin-top: 40px;
+}
+
+
+.toggleCon {
+    display: flex;
+    justify-content: flex-end;
+    max-width: 1400px;
+    position: relative;
+}
+
+
