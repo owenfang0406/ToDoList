@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { RiCloseCircleLine } from 'react-icons/ri'
 import{ TiEdit } from 'react-icons/ti'
 import TodoForm from './TodoForm'
 import './Todo.css'
 
 function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList}) {
+const containerRef = useRef(null)
 const [edit, setEdit] = useState ({
     id: null,
     value: ''
@@ -18,14 +19,29 @@ const submitUpdate = value => {
     })
 }
 
+useEffect(() => {
+    if (containerRef.current !== null) {
+      const container = containerRef.current;
+      const lastTodoElement = container.querySelector('.todo-row:last-child');
+      console.log(lastTodoElement)
+      if (lastTodoElement?.offsetTop !== undefined) {
+        lastTodoElement?.scrollIntoView({behavior: 'smooth'})
+      }
+    }
+  }, [todos.length]);
+  
+  
+  
+
 if (edit.id) {
     return <TodoForm edit={edit} onSubmit={submitUpdate}></TodoForm>
 }
   return (
-    todos.map((todo, index) => (
+    <div ref={containerRef}>
+    {todos.map((todo, index) => (
         <div 
         className='todo-row'
-        key={index}>
+        key={todo.id}>
             <div className='subBox'>
                 <label className='checkbox' for='myCheckBox' onClick={() => 
                     {
@@ -69,7 +85,8 @@ if (edit.id) {
                 />
             </div>
         </div>
-    ))
+    ))}
+    </div>
   )
 }
 

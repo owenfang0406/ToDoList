@@ -2,6 +2,10 @@
     max-width: 1400px;
     display: flex;
     align-items: center;
+    margin: 0 20px;
+    gap: 10px;
+    /* margin-right: 20px;
+    margin-left: 20px; */
 }
 
 .progressBar {
@@ -23,5 +27,4 @@
     font-size: 30px;
     color: rgba(144, 121, 185, 1);
     margin-bottom: 10px;
-    margin-right: 20px;
 }

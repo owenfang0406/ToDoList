@@ -26,6 +26,10 @@ const addTodo = todo => {
 
     const newTodos = [todo, ...todos]
 
+    if (newTodos.length > 0) {
+        newTodos.sort((a, b) => a.timestamp - b.timestamp)
+    }
+
     setTodos(() => newTodos)
 }
 
@@ -59,14 +63,14 @@ const completeTodo = id => {
 }
 
   return (
-    <>
+    <div className='wrapper'>
         <div className='progressBarCon'>
             <ProgressBar
             todos={todos}
             completedTodos={completedTodos}
             ></ProgressBar>
         </div>
-        <div>
+        <div className='todoCon'>
             <Todo 
             addToCompletedList={addToCompletedList}
             todos={todos}
@@ -81,7 +85,7 @@ const completeTodo = id => {
             ></TodoForm>
             </div>
         </div>
-    </>
+    </div>
   )
 }
 

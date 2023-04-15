@@ -34,6 +34,21 @@
     background-position: center center; */
 }
 
+.todo-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px 0px;
+    /* margin-left: 20px;
+    margin-right: 20px; */
+    color: rgb(144, 148, 184);
+    border-left: rgb(95, 122, 205) 5px solid;
+    background: rgb(255, 255, 255);
+    padding: 16px;
+    border-radius: 5px;
+    width: 100%;
+}
+
 .subBox input[type=checkbox] {
     display: none;
     width: 20px;
