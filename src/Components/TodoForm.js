@@ -14,7 +14,8 @@ const handleSubmit = e => {
 
     props.onSubmit({
         id: Math.floor(Math.random() * 10000),
-        text: input
+        text: input,
+        timestamp: Date.now()
     });
 
     setInput('');
