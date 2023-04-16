@@ -5,8 +5,6 @@ function ProgressBar({todos, completedTodos}) {
     const [progress, setProgress] = useState(0);
     const [completedCount, setCompletedCount] = useState(0);
 
-    console.log(todos.length)
-    console.log(completedTodos.length)
 
     const getColor = () => {
         if(progress < 40) {

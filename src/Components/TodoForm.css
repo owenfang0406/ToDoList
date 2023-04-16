@@ -2,6 +2,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 32px;
+    justify-content: center;
 }
 
 .todo-button {
@@ -12,7 +13,7 @@
     cursor: pointer;
     outline: none;
     background: rgb(95, 122, 205);
-    color: #fff;
+    color: white
 }
 
 .plus-icon {
@@ -20,4 +21,30 @@
     font-weight: bold;
     color: white;
 }
+
+.todo-input {
+    padding: 14px 32px 14px 16px;
+    border-radius: 4px;
+    background-color: white;
+    border: none;
+    outline: none;
+    width: 320px;
+    color: rgba(144, 121, 185, 1);
+    height: 48px;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
   
+.todo-input::placeholder {
+    color: gray
+}
+
+.todo-input.edit {
+    border: none;
+}
+  
+.todo-button.edit {
+    background: rgb(95, 122, 205);
+    color: white;
+    padding: 16px 22px;
+}

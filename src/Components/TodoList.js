@@ -3,13 +3,13 @@ import TodoForm from './TodoForm'
 import Todo from './Todo'
 import './TodoList.css'
 import ProgressBar from './ProgressBar'
+import CompleteList from './CompleteList'
 
 function TodoList() {
 const [todos, setTodos] = useState([])
 const [completedTodos, setCompletedTodos] = useState([])
 
 const addToCompletedList = (todo) => {
-    console.log(completedTodos)
     if(todo.isComplete) {
         setCompletedTodos(prevCompletedTodos => prevCompletedTodos.filter(CompletedTodo => CompletedTodo.id !== todo.id))
         completeTodo(todo.id);
@@ -79,12 +79,21 @@ const completeTodo = id => {
             updateTodo={updateTodo}
             ></Todo>
             <div className='inputBox'>
-            <h3>Add to list</h3>
-            <TodoForm
-            onSubmit={addTodo}
-            ></TodoForm>
+                <h3>Add to list</h3>
+                <TodoForm
+                onSubmit={addTodo}
+                ></TodoForm>
             </div>
         </div>
+        <CompleteList             
+            todos={todos}
+            completedTodos={completedTodos}
+            completeTodo={completeTodo}
+            removeTodo={removeTodo}
+            updateTodo={updateTodo}
+            addToCompletedList={addToCompletedList}
+            >
+        </CompleteList>
     </div>
   )
 }

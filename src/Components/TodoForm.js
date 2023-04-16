@@ -4,7 +4,6 @@ import './TodoForm.css'
 function TodoForm(props) {
 const [input, setInput] = useState(props?.edit?.value ? props.edit.value : '')
 const inputRef = useRef(null)
-console.log(props.edit)
 useEffect(() => {
     inputRef.current.focus();
 },[])
@@ -45,7 +44,6 @@ const handleChange = e => {
         (
         <>
         <input type='text'
-        placeholder='Add a todo'
         value={input}
         name='text'
         className='todo-input'
