@@ -8,9 +8,12 @@ function CompleteList({completedTodos, todos, completeTodo, removeTodo, updateTo
     const { isChecked } = useContext(ContextStore)
   return (
     <div className='CompleteListCon'>
-        <hr></hr>
-        <div className='toggleCon'>
-            <Toggle className='toggle'/>
+        <div className='upperBox'>
+          <hr></hr>
+          <div className='toggleCon'>
+              <div className='moveDownToEndNote'>Move done things to end?</div>
+              <Toggle className='toggle'/>
+          </div>
         </div>
         <div className='completedTodosCon'>
         {isChecked && <Todo 

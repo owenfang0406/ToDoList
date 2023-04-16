@@ -44,7 +44,7 @@ h1 {
   margin-bottom: 32px;
 } */
 
-.todo-input {
+/* .todo-input {
   padding: 14px 32px 14px 16px;
   border-radius: 4px 0 0 4px;
   border: 2px solid #5d0cff;
@@ -56,7 +56,7 @@ h1 {
 
 .todo-input::placeholder {
   color: #e2e2e2;
-}
+} */
 
 /* .todo-button {
   padding: 16px;
@@ -73,7 +73,7 @@ h1 {
   text-transform: capitalize;
 } */
 
-.todo-input.edit {
+/* .todo-input.edit {
   border: 2px solid #149fff;
 }
 
@@ -84,7 +84,7 @@ h1 {
     rgba(17, 122, 255, 1) 100%
   );
   padding: 16px 22px;
-}
+} */
 
 .todo-container {
   display: flex;

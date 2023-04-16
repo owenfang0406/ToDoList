@@ -1,16 +1,30 @@
 .CompleteListCon {
-    height: 40vh;
+    height: 30vh;
     max-width: 1400px;
     margin: 0px 20px;
-    margin-top: 40px;
+    margin-top: 10px;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.upperBox {
+    width: 100%;
 }
 
 
 .toggleCon {
+    margin-bottom: 20px;
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     max-width: 1400px;
     position: relative;
+    gap: 10px;
+}
+
+.moveDownToEndNote {
+    color: rgba(144, 121, 185, 1);
+    font-size: 1.2rem;
 }
 
 

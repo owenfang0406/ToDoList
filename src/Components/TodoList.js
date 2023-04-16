@@ -79,10 +79,10 @@ const completeTodo = id => {
             updateTodo={updateTodo}
             ></Todo>
             <div className='inputBox'>
-            <h3>Add to list</h3>
-            <TodoForm
-            onSubmit={addTodo}
-            ></TodoForm>
+                <h3>Add to list</h3>
+                <TodoForm
+                onSubmit={addTodo}
+                ></TodoForm>
             </div>
         </div>
         <CompleteList             

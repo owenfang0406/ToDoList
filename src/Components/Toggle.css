@@ -20,11 +20,12 @@
 }
 
 input:checked + .button {
-    background-color: blueviolet;
+    background-color: rgb(189, 204, 246);
 }
 
 input:checked + .button::before {
     transform: translateX(35px);
+    background-color: white;
 }
 
 .checkBoxInput {
