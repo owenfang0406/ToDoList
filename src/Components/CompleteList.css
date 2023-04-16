@@ -3,8 +3,13 @@
     max-width: 1400px;
     margin: 0px 20px;
     margin-top: 10px;
-    overflow-y: scroll;
     position: relative;
+}
+
+.completedTodosCon {
+    position: relative;
+    overflow-y: scroll;
+    height: 80%;
 }
 
 .upperBox {

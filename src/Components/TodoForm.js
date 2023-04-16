@@ -8,14 +8,27 @@ useEffect(() => {
     inputRef.current.focus();
 },[])
 
-const handleSubmit = e => {
+const handleSubmit = (e, todo) => {
     e.preventDefault();
 
-    props.onSubmit({
-        id: Math.floor(Math.random() * 10000),
-        text: input,
-        timestamp: Date.now()
-    });
+    if(todo?.id) {
+        props.onSubmit({
+            id: todo.id,
+            text: input,
+            isComplete: true,
+            timestamp: Date.now()
+        });
+
+    }else {
+
+        props.onSubmit({
+            id: Math.floor(Math.random() * 10000),
+            text: input,
+            timestamp: Date.now()
+        });
+
+    }
+
 
     setInput('');
 }
@@ -25,7 +38,7 @@ const handleChange = e => {
 }
 
   return (
-    <form className='todo-form' onSubmit={handleSubmit}>
+    <form className='todo-form' onSubmit={(event) => handleSubmit(event, props?.edit)}>
         {
         props.edit ? (
         <>

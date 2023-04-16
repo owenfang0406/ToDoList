@@ -38,6 +38,12 @@ const updateTodo = (todoId, newValue) => {
         return
     }
 
+    if(completedTodos.some(todo => todo.id === todoId)) {
+        setCompletedTodos((prev => prev.map(todo => (todo.id === todoId ? newValue : todo))))
+        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
+        return
+    }
+
     setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
 }
 

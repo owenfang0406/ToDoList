@@ -16,15 +16,17 @@ function CompleteList({completedTodos, todos, completeTodo, removeTodo, updateTo
           </div>
         </div>
         <div className='completedTodosCon'>
-        {isChecked && <Todo 
-            todos={todos}
-            completedTodos={completedTodos}
-            showCompletedTodosOnly={true}
-            completeTodo={completeTodo}
-            removeTodo={removeTodo}
-            updateTodo={updateTodo}
-            addToCompletedList={addToCompletedList}
-        ></Todo>}
+        {isChecked &&
+            <Todo 
+              todos={todos}
+              completedTodos={completedTodos}
+              showCompletedTodosOnly={true}
+              completeTodo={completeTodo}
+              removeTodo={removeTodo}
+              updateTodo={updateTodo}
+              addToCompletedList={addToCompletedList}
+            ></Todo>
+        }
         </div>
     </div>
   )

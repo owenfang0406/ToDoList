@@ -3,7 +3,6 @@ import './ProgressBar.css'
 
 function ProgressBar({todos, completedTodos}) {
     const [progress, setProgress] = useState(0);
-    const [completedCount, setCompletedCount] = useState(0);
 
 
     const getColor = () => {
@@ -22,7 +21,6 @@ function ProgressBar({todos, completedTodos}) {
     useEffect(()=>{
         const completedCountValue = Object.values(completedTodos).filter(todo => todo.isComplete).length;
         const progressValue = todos.length > 0 ? Math.floor((completedCountValue / todos.length) * 100) : 0;
-        setCompletedCount(completedCountValue);
         setProgress(progressValue);
 
     }, [todos.length, completedTodos.length])

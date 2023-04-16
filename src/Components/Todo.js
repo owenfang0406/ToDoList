@@ -8,20 +8,24 @@ import { ContextStore } from '../App'
 function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList, showCompletedTodosOnly = false, completedTodos}) {
 const { isChecked } = useContext(ContextStore)
 const containerRef = useRef(null)
+const containerRef2 = useRef(null)
 const [edit, setEdit] = useState ({
     id: null,
-    value: ''
+    value: '',
+    timestamp:'',
 })
 
 const submitUpdate = value => {
     updateTodo(edit.id, value)
     setEdit({
         id: null,
-        value: '' 
+        value: '',
+        timestamp:'',
     })
 }
 
 useEffect(() => {
+    console.log(showCompletedTodosOnly)
     if (containerRef.current !== null) {
       const container = containerRef.current;
       const lastTodoElement = container.querySelector('.todo-row:last-child');
@@ -29,9 +33,17 @@ useEffect(() => {
         lastTodoElement?.scrollIntoView({behavior: 'smooth'})
       }
     }
-    console.log(completedTodos)
 
-  }, [todos.length, completedTodos?.length]);
+    if (containerRef2.current !== null) {
+        const container = containerRef2.current;
+        const lastTodoElement = container.querySelector('.todo-row:last-child');
+        if (lastTodoElement.offsetTop !== undefined) {
+          lastTodoElement?.scrollIntoView(true, {behavior: 'smooth'})
+        }
+      }
+
+  }, [todos.length, completedTodos?.length, isChecked]);
+
   
   
 
@@ -42,7 +54,7 @@ if (edit.id) {
     <div ref={containerRef}>
     {showCompletedTodosOnly ? 
     (
-        completedTodos?.map((todo, index) => (
+        completedTodos?.map((todo) => (
             <div 
             className='todo-row'
             key={todo.id}>
@@ -77,9 +89,9 @@ if (edit.id) {
                      onClick={() => removeTodo(todo.id)}
                      className='delete-icon'
                     >
-                    <span class="close-symbol">
-                            <span class="close-symbol__line">
-                                </span><span class="close-symbol__line">
+                    <span className="close-symbol">
+                            <span className="close-symbol__line">
+                                </span><span className="close-symbol__line">
                             </span>
                     </span>
                     </div>
@@ -94,9 +106,10 @@ if (edit.id) {
     )
     : (
         isChecked ? (
-            todos.filter(todo => todo.isComplete !== true)?.map((todo) => (
+        <div ref={containerRef2}>
+            {todos.filter(todo => todo.isComplete !== true)?.map((todo) => (
             <div 
-            className='todo-row'
+            className='todo-row2 todo-row'
             key={todo.id}>
                 <div className='subBox'>
                     <label className='checkbox' for='myCheckBox' onClick={() => 
@@ -129,9 +142,9 @@ if (edit.id) {
                      onClick={() => removeTodo(todo.id)}
                      className='delete-icon'
                     >
-                    <span class="close-symbol">
-                            <span class="close-symbol__line">
-                                </span><span class="close-symbol__line">
+                    <span className="close-symbol">
+                            <span className="close-symbol__line">
+                                </span><span className="close-symbol__line">
                             </span>
                     </span>
                     </div>
@@ -141,11 +154,11 @@ if (edit.id) {
                     />
                 </div>
             </div>
-            ))
-
+            ))}
+        </div>
         ) : (
             
-            todos.map((todo, index) => (
+            todos.map((todo) => (
             <div 
             className='todo-row'
             key={todo.id}>
@@ -180,9 +193,9 @@ if (edit.id) {
                      onClick={() => removeTodo(todo.id)}
                      className='delete-icon'
                     >
-                    <span class="close-symbol">
-                            <span class="close-symbol__line">
-                                </span><span class="close-symbol__line">
+                    <span className="close-symbol">
+                            <span className="close-symbol__line">
+                                </span><span className="close-symbol__line">
                             </span>
                     </span>
                     </div>
