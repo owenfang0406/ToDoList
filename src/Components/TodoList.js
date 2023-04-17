@@ -85,10 +85,12 @@ const completeTodo = id => {
             updateTodo={updateTodo}
             ></Todo>
             <div className='inputBox'>
-                <h3>Add to list</h3>
-                <TodoForm
-                onSubmit={addTodo}
-                ></TodoForm>
+                <div className='inputBoxSubCon'>
+                    <h3 className='addToListNote'>Add to list</h3>
+                    <TodoForm
+                    onSubmit={addTodo}
+                    ></TodoForm>
+                </div>
             </div>
         </div>
         <CompleteList             

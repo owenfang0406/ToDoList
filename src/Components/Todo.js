@@ -37,7 +37,7 @@ useEffect(() => {
     if (containerRef2.current !== null) {
         const container = containerRef2.current;
         const lastTodoElement = container.querySelector('.todo-row:last-child');
-        if (lastTodoElement.offsetTop !== undefined) {
+        if (lastTodoElement?.offsetTop !== undefined) {
           lastTodoElement?.scrollIntoView(true, {behavior: 'smooth'})
         }
       }
@@ -79,7 +79,7 @@ if (edit.id) {
                         <div className='actualCheckBox'>
     
                         </div>
-                        <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                        <div key={todo.id} className={todo.isComplete ? 'todoText complete' : 'todoText'} >
                             {todo.text}
                         </div>
                     </label>
@@ -132,7 +132,7 @@ if (edit.id) {
                         <div className='actualCheckBox'>
     
                         </div>
-                        <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                        <div key={todo.id} className={todo.isComplete ? 'todoText complete' : 'todoText'} >
                             {todo.text}
                         </div>
                     </label>
@@ -183,7 +183,7 @@ if (edit.id) {
                         <div className='actualCheckBox'>
     
                         </div>
-                        <div key={todo.id} className={todo.isComplete ? 'complete' : ''} >
+                        <div key={todo.id} className={todo.isComplete ? 'todoText complete' : 'todoText'} >
                             {todo.text}
                         </div>
                     </label>

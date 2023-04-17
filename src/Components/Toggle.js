@@ -11,7 +11,6 @@ function Toggle() {
         type='checkbox'
         id="check"
         className='checkBoxInput'
-        // onChange={() => toggleCheckbox()}
         checked={isChecked}
         ></input>
         <label
