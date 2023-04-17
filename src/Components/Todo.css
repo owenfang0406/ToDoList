@@ -102,4 +102,11 @@
     scale: 1.2;
     opacity: 0.7;
 }
-  
+
+
+.todoText {
+    width: 100%;
+    white-space: pre-wrap;
+    overflow: scroll;
+    text-overflow: ellipsis;
+}

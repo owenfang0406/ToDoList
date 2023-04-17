@@ -1,10 +1,15 @@
 .CompleteListCon {
     height: 30vh;
     max-width: 1400px;
-    margin: 0px 20px;
-    margin-top: 10px;
-    overflow-y: scroll;
+    margin: 20px auto;
+    padding: 0 20px;
     position: relative;
+}
+
+.completedTodosCon {
+    position: relative;
+    overflow-y: scroll;
+    height: 80%;
 }
 
 .upperBox {

@@ -38,6 +38,12 @@ const updateTodo = (todoId, newValue) => {
         return
     }
 
+    if(completedTodos.some(todo => todo.id === todoId)) {
+        setCompletedTodos((prev => prev.map(todo => (todo.id === todoId ? newValue : todo))))
+        setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
+        return
+    }
+
     setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
 }
 
@@ -79,10 +85,12 @@ const completeTodo = id => {
             updateTodo={updateTodo}
             ></Todo>
             <div className='inputBox'>
-                <h3>Add to list</h3>
-                <TodoForm
-                onSubmit={addTodo}
-                ></TodoForm>
+                <div className='inputBoxSubCon'>
+                    <h3 className='addToListNote'>Add to list</h3>
+                    <TodoForm
+                    onSubmit={addTodo}
+                    ></TodoForm>
+                </div>
             </div>
         </div>
         <CompleteList             
