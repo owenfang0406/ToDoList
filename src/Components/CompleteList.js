@@ -1,11 +1,8 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React from 'react'
 import "./CompleteList.css"
 import Toggle from './Toggle'
-import Todo from './Todo'
-import { ContextStore } from '../App'
 
-function CompleteList({completedTodos, todos, completeTodo, removeTodo, updateTodo, addToCompletedList}) {
-    const { isChecked } = useContext(ContextStore)
+function CompleteList() {
   return (
     <div className='CompleteListCon'>
         <div className='upperBox'>
@@ -16,17 +13,6 @@ function CompleteList({completedTodos, todos, completeTodo, removeTodo, updateTo
           </div>
         </div>
         <div className='completedTodosCon'>
-        {isChecked &&
-            <Todo 
-              todos={todos}
-              completedTodos={completedTodos}
-              showCompletedTodosOnly={true}
-              completeTodo={completeTodo}
-              removeTodo={removeTodo}
-              updateTodo={updateTodo}
-              addToCompletedList={addToCompletedList}
-            ></Todo>
-        }
         </div>
     </div>
   )

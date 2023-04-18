@@ -1,35 +1,41 @@
 import React, { useEffect, useState, useRef, useContext } from 'react'
-import { RiCloseCircleLine } from 'react-icons/ri'
 import{ TiEdit } from 'react-icons/ti'
 import TodoForm from './TodoForm'
 import './Todo.css'
 import { ContextStore } from '../App'
 
 function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList, showCompletedTodosOnly = false, completedTodos}) {
+// Use the useContext hook to access the isChecked value from the ContextStore context
 const { isChecked } = useContext(ContextStore)
+ // Use useRef hooks to reference the container divs that hold the todo items
 const containerRef = useRef(null)
 const containerRef2 = useRef(null)
+// Initialize the edit state variable to an object with empty values
 const [edit, setEdit] = useState ({
     id: null,
     value: '',
     timestamp:'',
+    isComplete:'',
 })
 
-const submitUpdate = value => {
+// Function to handle submitting an updated todo item
+const submitUpdate = (value) => {
     updateTodo(edit.id, value)
     setEdit({
         id: null,
         value: '',
         timestamp:'',
+        isComplete:'',
     })
 }
 
+// Use the useEffect hook to scroll the container div to the last todo item whenever the todos, completedTodos, or isChecked props change
 useEffect(() => {
-    console.log(showCompletedTodosOnly)
-    if (containerRef.current !== null) {
+    if (containerRef.current !== null && !isChecked) {
       const container = containerRef.current;
       const lastTodoElement = container.querySelector('.todo-row:last-child');
       if (lastTodoElement?.offsetTop !== undefined) {
+        console.log(lastTodoElement)
         lastTodoElement?.scrollIntoView({behavior: 'smooth'})
       }
     }
@@ -38,6 +44,8 @@ useEffect(() => {
         const container = containerRef2.current;
         const lastTodoElement = container.querySelector('.todo-row:last-child');
         if (lastTodoElement?.offsetTop !== undefined) {
+          console.log(lastTodoElement)
+            
           lastTodoElement?.scrollIntoView(true, {behavior: 'smooth'})
         }
       }
@@ -46,10 +54,14 @@ useEffect(() => {
 
   
   
-
+// If the edit state variable has an id property, render the TodoForm component with the edit and submitUpdate props
 if (edit.id) {
     return <TodoForm edit={edit} onSubmit={submitUpdate}></TodoForm>
 }
+
+ // If showCompletedTodosOnly is true, map through the completedTodos array and render a todo item for each one
+ // This component is intended to provide 3 different version of JSX based on the instructed arguments to  determine which one of three
+ // to be return when this component is used elsewhere.
   return (
     <div ref={containerRef}>
     {showCompletedTodosOnly ? 
@@ -96,7 +108,7 @@ if (edit.id) {
                     </span>
                     </div>
                     <TiEdit
-                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    onClick={() => setEdit({ id: todo.id, value: todo.text, timestamp: todo.timestamp, isComplete: todo?.isComplete })}
                     className='edit-icon'
                     />
                 </div>
@@ -149,7 +161,7 @@ if (edit.id) {
                     </span>
                     </div>
                     <TiEdit
-                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    onClick={() => setEdit({ id: todo.id, value: todo.text, timestamp: todo.timestamp, isComplete: todo?.isComplete })}
                     className='edit-icon'
                     />
                 </div>
@@ -200,7 +212,7 @@ if (edit.id) {
                     </span>
                     </div>
                     <TiEdit
-                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    onClick={() => setEdit({ id: todo.id, value: todo.text, timestamp: todo.timestamp, isComplete: todo?.isComplete })}
                     className='edit-icon'
                     />
                 </div>
