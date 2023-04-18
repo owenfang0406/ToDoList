@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef, useContext } from 'react'
-import { RiCloseCircleLine } from 'react-icons/ri'
 import{ TiEdit } from 'react-icons/ti'
 import TodoForm from './TodoForm'
 import './Todo.css'
@@ -13,23 +12,25 @@ const [edit, setEdit] = useState ({
     id: null,
     value: '',
     timestamp:'',
+    isComplete:'',
 })
 
-const submitUpdate = value => {
+const submitUpdate = (value) => {
     updateTodo(edit.id, value)
     setEdit({
         id: null,
         value: '',
         timestamp:'',
+        isComplete:'',
     })
 }
 
 useEffect(() => {
-    console.log(showCompletedTodosOnly)
-    if (containerRef.current !== null) {
+    if (containerRef.current !== null && !isChecked) {
       const container = containerRef.current;
       const lastTodoElement = container.querySelector('.todo-row:last-child');
       if (lastTodoElement?.offsetTop !== undefined) {
+        console.log(lastTodoElement)
         lastTodoElement?.scrollIntoView({behavior: 'smooth'})
       }
     }
@@ -38,6 +39,8 @@ useEffect(() => {
         const container = containerRef2.current;
         const lastTodoElement = container.querySelector('.todo-row:last-child');
         if (lastTodoElement?.offsetTop !== undefined) {
+          console.log(lastTodoElement)
+            
           lastTodoElement?.scrollIntoView(true, {behavior: 'smooth'})
         }
       }
@@ -96,7 +99,7 @@ if (edit.id) {
                     </span>
                     </div>
                     <TiEdit
-                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    onClick={() => setEdit({ id: todo.id, value: todo.text, timestamp: todo.timestamp, isComplete: todo?.isComplete })}
                     className='edit-icon'
                     />
                 </div>
@@ -149,7 +152,7 @@ if (edit.id) {
                     </span>
                     </div>
                     <TiEdit
-                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    onClick={() => setEdit({ id: todo.id, value: todo.text, timestamp: todo.timestamp, isComplete: todo?.isComplete })}
                     className='edit-icon'
                     />
                 </div>
@@ -200,7 +203,7 @@ if (edit.id) {
                     </span>
                     </div>
                     <TiEdit
-                    onClick={() => setEdit({ id: todo.id, value: todo.text })}
+                    onClick={() => setEdit({ id: todo.id, value: todo.text, timestamp: todo.timestamp, isComplete: todo?.isComplete })}
                     className='edit-icon'
                     />
                 </div>

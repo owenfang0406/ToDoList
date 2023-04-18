@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import TodoForm from './TodoForm'
 import Todo from './Todo'
 import './TodoList.css'
 import ProgressBar from './ProgressBar'
 import CompleteList from './CompleteList'
+import { ContextStore } from '../App'
 
 function TodoList() {
 const [todos, setTodos] = useState([])
 const [completedTodos, setCompletedTodos] = useState([])
+const { isChecked } = useContext(ContextStore)
 
 const addToCompletedList = (todo) => {
     if(todo.isComplete) {
@@ -33,11 +35,12 @@ const addTodo = todo => {
     setTodos(() => newTodos)
 }
 
-const updateTodo = (todoId, newValue) => {
+const updateTodo = (todoId, newValue, timestamp) => {
     if(!newValue.text || /^\s*$/.test(newValue)) {
         return
     }
-
+    console.log(todoId)
+    console.log(newValue)
     if(completedTodos.some(todo => todo.id === todoId)) {
         setCompletedTodos((prev => prev.map(todo => (todo.id === todoId ? newValue : todo))))
         setTodos(prev => prev.map(item => (item.id === todoId ? newValue : item)))
@@ -76,7 +79,7 @@ const completeTodo = id => {
             completedTodos={completedTodos}
             ></ProgressBar>
         </div>
-        <div className='todoCon'>
+        <div className=" max-w-[1400px] h-full mx-auto px-[20px] overflow-y-scroll scrollbar-thin scrollbar-w-10 scrollbar-thumb-blue-200">
             <Todo 
             addToCompletedList={addToCompletedList}
             todos={todos}
@@ -84,14 +87,17 @@ const completeTodo = id => {
             removeTodo={removeTodo}
             updateTodo={updateTodo}
             ></Todo>
-            <div className='inputBox'>
-                <div className='inputBoxSubCon'>
-                    <h3 className='addToListNote'>Add to list</h3>
-                    <TodoForm
-                    onSubmit={addTodo}
-                    ></TodoForm>
-                </div>
-            </div>
+        {isChecked &&
+            <Todo 
+              todos={todos}
+              completedTodos={completedTodos}
+              showCompletedTodosOnly={true}
+              completeTodo={completeTodo}
+              removeTodo={removeTodo}
+              updateTodo={updateTodo}
+              addToCompletedList={addToCompletedList}
+            ></Todo>
+        }
         </div>
         <CompleteList             
             todos={todos}
@@ -102,6 +108,14 @@ const completeTodo = id => {
             addToCompletedList={addToCompletedList}
             >
         </CompleteList>
+        <div className='inputBox'>
+            <div className='inputBoxSubCon'>
+                <h3 className='addToListNote'>Add to list</h3>
+                <TodoForm
+                onSubmit={addTodo}
+                ></TodoForm>
+            </div>
+        </div>
     </div>
   )
 }

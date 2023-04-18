@@ -8,23 +8,32 @@ useEffect(() => {
     inputRef.current.focus();
 },[])
 
+
 const handleSubmit = (e, todo) => {
     e.preventDefault();
-
-    if(todo?.id) {
-        props.onSubmit({
-            id: todo.id,
-            text: input,
-            isComplete: true,
-            timestamp: Date.now()
-        });
+    if(todo?.timestamp) {
+        if (todo?.isComplete) {
+            props.onSubmit({
+                id: todo.id,
+                text: input,
+                isComplete: true,
+                timestamp: Date.now()
+            })
+        } else {
+            props.onSubmit({
+                id: todo.id,
+                text: input,
+                isComplete: false,
+                timestamp: Date.now()
+            });
+        }
 
     }else {
-
         props.onSubmit({
             id: Math.floor(Math.random() * 10000),
             text: input,
-            timestamp: Date.now()
+            timestamp: Date.now(),
+            isComplete: false
         });
 
     }
@@ -50,7 +59,7 @@ const handleChange = e => {
         onChange={handleChange}
         ref={inputRef}
         ></input>
-        <button className='todo-button edit'>Update</button>
+        <button className='todo-button edit'>Send</button>
         </>
         ) : 
         
