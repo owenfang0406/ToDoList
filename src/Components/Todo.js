@@ -5,9 +5,12 @@ import './Todo.css'
 import { ContextStore } from '../App'
 
 function Todo({todos, completeTodo, removeTodo, updateTodo, addToCompletedList, showCompletedTodosOnly = false, completedTodos}) {
+// Use the useContext hook to access the isChecked value from the ContextStore context
 const { isChecked } = useContext(ContextStore)
+ // Use useRef hooks to reference the container divs that hold the todo items
 const containerRef = useRef(null)
 const containerRef2 = useRef(null)
+// Initialize the edit state variable to an object with empty values
 const [edit, setEdit] = useState ({
     id: null,
     value: '',
@@ -15,6 +18,7 @@ const [edit, setEdit] = useState ({
     isComplete:'',
 })
 
+// Function to handle submitting an updated todo item
 const submitUpdate = (value) => {
     updateTodo(edit.id, value)
     setEdit({
@@ -25,6 +29,7 @@ const submitUpdate = (value) => {
     })
 }
 
+// Use the useEffect hook to scroll the container div to the last todo item whenever the todos, completedTodos, or isChecked props change
 useEffect(() => {
     if (containerRef.current !== null && !isChecked) {
       const container = containerRef.current;
@@ -49,10 +54,14 @@ useEffect(() => {
 
   
   
-
+// If the edit state variable has an id property, render the TodoForm component with the edit and submitUpdate props
 if (edit.id) {
     return <TodoForm edit={edit} onSubmit={submitUpdate}></TodoForm>
 }
+
+ // If showCompletedTodosOnly is true, map through the completedTodos array and render a todo item for each one
+ // This component is intended to provide 3 different version of JSX based on the instructed arguments to  determine which one of three
+ // to be return when this component is used elsewhere.
   return (
     <div ref={containerRef}>
     {showCompletedTodosOnly ? 
