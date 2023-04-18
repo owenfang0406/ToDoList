@@ -58,8 +58,8 @@ if (edit.id) {
 }
 
  // If showCompletedTodosOnly is true, map through the completedTodos array and render a todo item for each one
- // This component is intended to provide 3 different version of JSX based on the instructed arguments to  determine which one of three
- // to be return when this component is used elsewhere.
+ // This component is intended to provide 3 different versions of JSX based on the instructed arguments to determine which one of the three
+ // versions to be returned when this component is used elsewhere.
   return (
     <div ref={containerRef}>
     {showCompletedTodosOnly ? 
