@@ -35,7 +35,6 @@ useEffect(() => {
       const container = containerRef.current;
       const lastTodoElement = container.querySelector('.todo-row:last-child');
       if (lastTodoElement?.offsetTop !== undefined) {
-        console.log(lastTodoElement)
         lastTodoElement?.scrollIntoView({behavior: 'smooth'})
       }
     }
@@ -44,7 +43,6 @@ useEffect(() => {
         const container = containerRef2.current;
         const lastTodoElement = container.querySelector('.todo-row:last-child');
         if (lastTodoElement?.offsetTop !== undefined) {
-          console.log(lastTodoElement)
             
           lastTodoElement?.scrollIntoView(true, {behavior: 'smooth'})
         }
